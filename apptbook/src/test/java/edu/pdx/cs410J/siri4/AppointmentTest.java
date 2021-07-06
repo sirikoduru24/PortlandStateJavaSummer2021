@@ -1,5 +1,6 @@
 package edu.pdx.cs410J.siri4;
 
+import edu.pdx.cs410J.InvokeMainTestCase;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.CoreMatchers.*;
@@ -14,21 +15,21 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class AppointmentTest {
 
   @Test
-  void getBeginTimeStringNeedsToBeImplemented() {
-    Appointment appointment = new Appointment();
-    assertThrows(UnsupportedOperationException.class, appointment::getBeginTimeString);
+  void getBeginTimeReturnsBeginTimeAlongWithDate() {
+    Appointment appointment = new Appointment(new String[]{"-print","siri","have appointment with Lisa","7/15/2021" ,"12:30", "7/15/2021" ,"14:30"});
+    assertThat(appointment.getBeginTimeString(), equalTo("7/15/2021 12:30"));
   }
 
   @Test
-  void initiallyAllAppointmentsHaveTheSameDescription() {
-    Appointment appointment = new Appointment();
-    assertThat(appointment.getDescription(), containsString("not implemented"));
+  void getEndTimeReturnsDateAlongWithTime() {
+    Appointment appointment = new Appointment(new String[]{"-print","siri","have appointment with Lisa","7/15/2021" ,"12:30", "7/15/2021","14:30"});
+    assertThat(appointment.getEndTimeString(), equalTo("7/15/2021 14:30"));
   }
 
   @Test
-  void forProject1ItIsOkayIfGetBeginTimeReturnsNull() {
-    Appointment appointment = new Appointment();
-    assertThat(appointment.getBeginTime(), is(nullValue()));
+  void getDescriptionReturnsDescription() {
+    Appointment appointment = new Appointment(new String[]{"-print","siri","have appointment with Lisa","7/15/2021" ,"12:30", "7/15/2021","14:30"});
+    assertThat(appointment.getDescription(), equalTo("have appointment with Lisa"));
   }
 
 }
