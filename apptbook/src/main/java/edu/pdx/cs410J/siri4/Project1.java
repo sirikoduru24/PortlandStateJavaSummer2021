@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class Project1 {
   /**
-   * Strings to print the error messages.
+   * public variable of type <code>String</code>
    */
   public static final String USAGE_MSG = "usage: java apptBook [-print -ReadMe] owner description startdate startime enddate endtime";
   public static final String MISSING_ARGS = "Missing command line arguments. Expected some options and arguments in the below order";
@@ -152,10 +152,10 @@ public class Project1 {
   }
 
   /**
+   * This method prints the message given along with the USAGE_MESSAGE of the program
    * @param message
-   * This method takes the message as an argument and prints all error messages when this method is called with the required message parameter.
    */
-  private static void printErrorMessageAndExit(String message) {
+  public static void printErrorMessageAndExit(String message) {
     System.err.println(message);
     System.err.println(USAGE_MSG);
     System.exit(1);
@@ -164,7 +164,7 @@ public class Project1 {
   /**
    * This method prints the Readme for the project when -readme option is invoked.
    */
-  private static void printReadMe() {
+  public static void printReadMe() {
     try {
       InputStream is = Project1.class.getResourceAsStream("README.txt");
       BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -183,12 +183,12 @@ public class Project1 {
   }
 
   /**
+   * This method checks if the arguments are valid.
+   * Returns true if all arguments are valid else returns false.
    * @param args
-   * @return boolean
-   * validates all the arguments.
-   *
+   * @return
    */
-  private static boolean checkIfArgsAreValid(String[] args) {
+  public static boolean checkIfArgsAreValid(String[] args) {
     if(!checkIfNameOrDescriptionIsValid(args[1])) {
       System.err.println("Entered owner name is empty. Expected an owner consisting of any characters including numbers");
     }
@@ -216,24 +216,23 @@ public class Project1 {
   }
 
   /**
+   * Checks if there are any empty strings provided as name or description.
    * @param arg
-   * @return boolean
-   * This method takes either name or description as an argument.
-   * Returns true if the argument is valid else returns invalid.
+   * @return
    */
-  private static boolean checkIfNameOrDescriptionIsValid(String arg) {
+  public static boolean checkIfNameOrDescriptionIsValid(String arg) {
     if(arg.trim().isEmpty()) {
       return false;
     }
     return true;
   }
+
   /**
+   * This method takes date as a parameter and checks if it is valid. Valid format mm/dd/yyyy.
    * @param date
-   * @return boolean
-   * This method takes date as a parameter.
-   * Validates the date in the format mm/dd/yyyy.
+   * @return
    */
-  private static boolean checkIfDateIsValid(String date) {
+  public static boolean checkIfDateIsValid(String date) {
     try {
       SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
       Date x = sdf.parse(date);
@@ -250,11 +249,11 @@ public class Project1 {
   }
 
   /**
+   * This method takes time as a parameter and validates if it is in the format hh:mm.
    * @param time
-   * @return boolean
-   * This method validates the parameter time if it is in the format of hh:mm.
+   * @return
    */
-  private static boolean checkIfTimeIsValid(String time) {
+  public static boolean checkIfTimeIsValid(String time) {
     try {
       SimpleDateFormat sdf = new SimpleDateFormat("H:mm");
       Date x = sdf.parse(time);
