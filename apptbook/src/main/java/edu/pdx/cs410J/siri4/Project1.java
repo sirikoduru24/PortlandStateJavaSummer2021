@@ -92,6 +92,9 @@ public class Project1 {
             AppointmentBook apptbook = new AppointmentBook(appointment,args[1]);
             System.err.println(appointment.toString());
             System.exit(0);
+          } else {
+            System.out.println(USAGE_MSG);
+            System.exit(1);
           }
           } else {
           printErrorMessageAndExit(TOO_MANY_ARGS_NO_OPTIONS);
