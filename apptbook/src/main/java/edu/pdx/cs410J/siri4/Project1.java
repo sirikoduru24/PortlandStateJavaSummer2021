@@ -48,6 +48,7 @@ public class Project1 {
       } else {
         if(args[0].equalsIgnoreCase("-print")) {
           System.err.println("Missing arguments to perform print");
+          System.err.println(USAGE_MSG);
           System.exit(1);
         } else {
           printErrorMessageAndExit(TOO_FEW_ARGUMENTS_NO_OPTIONS_PRESENT);
@@ -109,14 +110,32 @@ public class Project1 {
                   printErrorMessageAndExit(TOO_FEW_ARGUMENTS_OPTIONS_PRESENT);
                   break;
                 case 4:
+                  if(!checkIfDateIsValid(args[3])) {
+                    System.err.println("Entered Invalid start date");
+                  }
                   System.err.println("Missing start time");
                   printErrorMessageAndExit(TOO_FEW_ARGUMENTS_OPTIONS_PRESENT);
                   break;
                 case 5:
+                  if(!checkIfDateIsValid(args[3])) {
+                    System.err.println("Entered Invalid start date");
+                  }
+                  if(!checkIfTimeIsValid(args[4])) {
+                    System.err.println("Entered Invalid start time");
+                  }
                   System.err.println("Missing end date");
                   printErrorMessageAndExit(TOO_FEW_ARGUMENTS_OPTIONS_PRESENT);
                   break;
                 case 6:
+                  if(!checkIfDateIsValid(args[3])) {
+                    System.err.println("Entered Invalid start date");
+                  }
+                  if(!checkIfTimeIsValid(args[4])) {
+                    System.err.println("Entered Invalid start time");
+                  }
+                  if(!checkIfDateIsValid(args[5])) {
+                    System.err.println("Entered Invalid end date");
+                  }
                   System.err.println("Missing end time");
                   printErrorMessageAndExit(TOO_FEW_ARGUMENTS_OPTIONS_PRESENT);
                   break;
