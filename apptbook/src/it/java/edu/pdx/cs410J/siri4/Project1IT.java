@@ -104,21 +104,18 @@ class Project1IT extends InvokeMainTestCase {
   @Test
   void invokingMainWithFourArguments() {
     MainMethodResult result = invokeMain(Project1.class, "-print","siri", "meet me", "7/15/2021");
-    assertThat(result.getTextWrittenToStandardError(), containsString("Missing start time"));
     assertThat(result.getTextWrittenToStandardError(), containsString(Project1.TOO_FEW_ARGUMENTS_OPTIONS_PRESENT));
   }
 
   @Test
   void invokingMainWithFiveArguments() {
     MainMethodResult result = invokeMain(Project1.class, "-print","siri","meet me", "7/15/2021", "1:39");
-    assertThat(result.getTextWrittenToStandardError(), containsString("Missing end date"));
     assertThat(result.getTextWrittenToStandardError(), containsString(Project1.TOO_FEW_ARGUMENTS_OPTIONS_PRESENT));
   }
 
   @Test
   void invokingMainWithSixArguments() {
     MainMethodResult result = invokeMain(Project1.class, "-print","siri","meet me", "7/15/2021", "1:39", "7/15/2021");
-    assertThat(result.getTextWrittenToStandardError(), containsString("Missing end time"));
     assertThat(result.getTextWrittenToStandardError(), containsString(Project1.TOO_FEW_ARGUMENTS_OPTIONS_PRESENT));
   }
 

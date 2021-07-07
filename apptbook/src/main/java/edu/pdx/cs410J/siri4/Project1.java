@@ -113,7 +113,6 @@ public class Project1 {
                   if(!checkIfDateIsValid(args[3])) {
                     System.err.println("Entered Invalid start date");
                   }
-                  System.err.println("Missing start time");
                   printErrorMessageAndExit(TOO_FEW_ARGUMENTS_OPTIONS_PRESENT);
                   break;
                 case 5:
@@ -123,7 +122,6 @@ public class Project1 {
                   if(!checkIfTimeIsValid(args[4])) {
                     System.err.println("Entered Invalid start time");
                   }
-                  System.err.println("Missing end date");
                   printErrorMessageAndExit(TOO_FEW_ARGUMENTS_OPTIONS_PRESENT);
                   break;
                 case 6:
@@ -136,12 +134,10 @@ public class Project1 {
                   if(!checkIfDateIsValid(args[5])) {
                     System.err.println("Entered Invalid end date");
                   }
-                  System.err.println("Missing end time");
                   printErrorMessageAndExit(TOO_FEW_ARGUMENTS_OPTIONS_PRESENT);
                   break;
               }
             }
-            //printErrorMessageAndExit(TOO_FEW_ARGUMENTS_OPTIONS_PRESENT);
           }
           else if(!(args[0].equalsIgnoreCase("-readme") || args[1].equalsIgnoreCase("-readme")) &&
                 !(args[0].equalsIgnoreCase("-print") || args[1].equalsIgnoreCase("-print"))){
