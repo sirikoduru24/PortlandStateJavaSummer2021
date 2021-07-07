@@ -105,7 +105,6 @@ public class Project1 {
   }
 
   /**
-   *
    * @param message
    * This method takes the message as an argument and prints all error messages when this method is called with the required message parameter.
    */
@@ -137,13 +136,18 @@ public class Project1 {
   }
 
   /**
-   *
    * @param args
-   * This method validates all the arguments.
-   * @return true when all arguments are correct.
-   * @return false when even a single argument is not correct.
+   * @return boolean
+   * validates all the arguments.
+   *
    */
   private static boolean checkIfArgsAreValid(String[] args) {
+    if(!checkIfNameOrDescriptionIsValid(args[1])) {
+      System.err.println("Entered owner name is empty. Expected an owner consisting of any characters including numbers");
+    }
+    if(!checkIfNameOrDescriptionIsValid(args[2])) {
+      System.err.println("Entered description is empty. Expected a description consisting of any characters including numbers");
+    }
     if(!checkIfDateIsValid(args[3])) {
       System.err.println("Entered start date is invalid");
     }
@@ -156,7 +160,7 @@ public class Project1 {
     if(!checkIfTimeIsValid(args[6])) {
       System.err.println("Entered end time is invalid");
     }
-    if (checkIfDateIsValid(args[3]) && checkIfDateIsValid(args[5]) && checkIfTimeIsValid(args[4])
+    if (checkIfNameOrDescriptionIsValid(args[1]) && checkIfNameOrDescriptionIsValid(args[2]) && checkIfDateIsValid(args[3]) && checkIfDateIsValid(args[5]) && checkIfTimeIsValid(args[4])
             && checkIfTimeIsValid(args[6])) {
       return true;
     } else {
@@ -165,11 +169,22 @@ public class Project1 {
   }
 
   /**
+   * @param arg
+   * @return boolean
+   * This method takes either name or description as an argument.
+   * Returns true if the argument is valid else returns invalid.
+   */
+  private static boolean checkIfNameOrDescriptionIsValid(String arg) {
+    if(arg.trim().isEmpty()) {
+      return false;
+    }
+    return true;
+  }
+  /**
+   * @param date
+   * @return boolean
    * This method takes date as a parameter.
    * Validates the date in the format mm/dd/yyyy.
-   * @param date
-   * @return true if the date is valid.
-   * @return false if the date is invalid.
    */
   private static boolean checkIfDateIsValid(String date) {
     try {
@@ -188,10 +203,9 @@ public class Project1 {
   }
 
   /**
-   * This method validates the paramter time if it is in the format of hh:mm.
    * @param time
-   * @return true if the time is valid.
-   * @return false if the time is invalid.
+   * @return boolean
+   * This method validates the parameter time if it is in the format of hh:mm.
    */
   private static boolean checkIfTimeIsValid(String time) {
     try {

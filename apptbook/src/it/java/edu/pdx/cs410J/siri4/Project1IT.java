@@ -94,6 +94,18 @@ class Project1IT extends InvokeMainTestCase {
   }
 
   @Test
+  void invokingMainWithInvalidOwnerName() {
+    MainMethodResult result = invokeMain(Project1.class, "-print", "       ", "Have dinner", "7/15/2021", "8:39", "7/15/2021", "14:39");
+    assertThat(result.getTextWrittenToStandardError(), containsString("Entered owner name is empty. Expected an owner consisting of any characters including numbers"));
+  }
+
+  @Test
+  void invokingMainWithInvalidDescription() {
+    MainMethodResult result = invokeMain(Project1.class, "-print", "siri", "", "7/15/2021", "8:39", "7/15/2021", "14:39");
+    assertThat(result.getTextWrittenToStandardError(), containsString("Entered description is empty. Expected a description consisting of any characters including numbers"));
+  }
+
+  @Test
   void invokingMainWithInvalidStartDate() {
     MainMethodResult result = invokeMain(Project1.class, "-print", "siri", "Having dinner with Lisa", "17/15/2021", "8:39", "7/15/2021", "14:39");
     assertThat(result.getTextWrittenToStandardError(), containsString("Entered start date is invalid"));
