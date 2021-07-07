@@ -12,6 +12,9 @@ import java.util.Date;
  * The main class for the CS410J appointment book Project
  */
 public class Project1 {
+  /**
+   * Strings to print the error messages.
+   */
   public static final String USAGE_MSG = "usage: java apptBook [-print -ReadMe] owner description startdate startime enddate endtime";
   public static final String MISSING_ARGS = "Missing command line arguments. Expected some options and arguments in the below order";
   public static final String TOO_MANY_ARGS = "Too many arguments provided expected only few: in the below format";
@@ -20,13 +23,24 @@ public class Project1 {
   public static final String TOO_MANY_ARGS_NO_OPTIONS = "There are more than expected number of arguments and there are no options";
   public static final String TOO_FEW_ARGUMENTS_OPTIONS_PRESENT = "There are less than the expected number of arguments. Expected arguments in the below format.";
   public static final String TOO_FEW_ARGUMENTS_NO_OPTIONS_PRESENT = "There are no options present and less than the expected number of arguments.\n " +
-          "Expected argumenents in the below format";
+          "Expected arguments in the below format";
 
+  /**
+   * main method for the class Project-1
+   * @author Siri Koduru
+   * @param args
+   */
   public static void main(String[] args) {
-    int i = 0;
+    /**
+     * checks if there are no arguments and prints an error message.
+     */
     if (args.length == 0) {
       printErrorMessageAndExit(MISSING_ARGS);
     }
+    /**
+     * checks if there is only one argument and if it is "-readme",
+     * prints the readme file and exits.Else it prints the respective error message.
+     */
     else if(args.length == 1) {
       if(args[0].equalsIgnoreCase("-readme")) {
         printReadMe();
@@ -35,10 +49,19 @@ public class Project1 {
        printErrorMessageAndExit(TOO_FEW_ARGUMENTS_NO_OPTIONS_PRESENT);
       }
     }
+    /**
+     * If there is [-readme] option at either first or second position,
+     * prints the project README and exits.
+     */
     else if(args[0].equalsIgnoreCase("-readme") || args[1].equalsIgnoreCase("-readme")) {
       printReadMe();
       System.exit(1);
     }
+    /**
+     * Checks if there are more than the required number of arguments.
+     * Checks if there are any options present, if there are options present, displays the error message of more arguments.
+     * If there are no options displays the error message of many arguments and no options.
+     */
     else if(args.length >= 8) {
       if((args[0].equalsIgnoreCase("-readme") || args[1].equalsIgnoreCase("-readme")) ||
               (args[0].equalsIgnoreCase("-print") || args[1].equalsIgnoreCase("-print"))) {
@@ -48,7 +71,14 @@ public class Project1 {
               !(args[0].equalsIgnoreCase("-print") || args[1].equalsIgnoreCase("-print"))){
         printErrorMessageAndExit(TOO_MANY_ARGS_NO_OPTIONS);
       }
-    } else if(args.length < 8) {
+    }
+    /**
+     * Checks if the args list length is less than the required length.
+     * If there are expected number of arguments along with the options then it prints the description
+     * validating the arguments.
+     * Else displays the error message that there are less number of arguments.
+     */
+    else if(args.length < 8) {
       if(args.length == 7) {
         if (args[0].equalsIgnoreCase("-print")) {
           if(checkIfArgsAreValid(args)) {
@@ -74,12 +104,20 @@ public class Project1 {
     System.exit(0);
   }
 
+  /**
+   *
+   * @param message
+   * This method takes the message as an argument and prints all error messages when this method is called with the required message parameter.
+   */
   private static void printErrorMessageAndExit(String message) {
     System.err.println(message);
     System.err.println(USAGE_MSG);
     System.exit(1);
   }
 
+  /**
+   * This method prints the Readme for the project when -readme option is invoked.
+   */
   private static void printReadMe() {
     try {
       InputStream is = Project1.class.getResourceAsStream("README.txt");
@@ -98,6 +136,13 @@ public class Project1 {
     }
   }
 
+  /**
+   *
+   * @param args
+   * This method validates all the arguments.
+   * @return true when all arguments are correct.
+   * @return false when even a single argument is not correct.
+   */
   private static boolean checkIfArgsAreValid(String[] args) {
     if(!checkIfDateIsValid(args[3])) {
       System.err.println("Entered start date is invalid");
@@ -119,6 +164,13 @@ public class Project1 {
     }
   }
 
+  /**
+   * This method takes date as a parameter.
+   * Validates the date in the format mm/dd/yyyy.
+   * @param date
+   * @return true if the date is valid.
+   * @return false if the date is invalid.
+   */
   private static boolean checkIfDateIsValid(String date) {
     try {
       SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
@@ -135,6 +187,12 @@ public class Project1 {
     }
   }
 
+  /**
+   * This method validates the paramter time if it is in the format of hh:mm.
+   * @param time
+   * @return true if the time is valid.
+   * @return false if the time is invalid.
+   */
   private static boolean checkIfTimeIsValid(String time) {
     try {
       SimpleDateFormat sdf = new SimpleDateFormat("H:mm");
