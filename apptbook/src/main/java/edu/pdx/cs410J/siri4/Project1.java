@@ -46,7 +46,12 @@ public class Project1 {
         printReadMe();
         System.exit(1);
       } else {
-       printErrorMessageAndExit(TOO_FEW_ARGUMENTS_NO_OPTIONS_PRESENT);
+        if(args[0].equalsIgnoreCase("-print")) {
+          System.err.println("Missing arguments to perform print");
+          System.exit(1);
+        } else {
+          printErrorMessageAndExit(TOO_FEW_ARGUMENTS_NO_OPTIONS_PRESENT);
+        }
       }
     }
     /**
@@ -93,7 +98,31 @@ public class Project1 {
         } else {
           if(args[0].equalsIgnoreCase("-readme") || args[1].equalsIgnoreCase("-readme")
           || args[0].equalsIgnoreCase("-print") || args[1].equalsIgnoreCase("-print")) {
-            printErrorMessageAndExit(TOO_FEW_ARGUMENTS_OPTIONS_PRESENT);
+            if(args[0].equalsIgnoreCase("-print")) {
+              switch(args.length) {
+                case 2:
+                  System.err.println("Missing description");
+                  printErrorMessageAndExit(TOO_FEW_ARGUMENTS_OPTIONS_PRESENT);
+                  break;
+                case 3:
+                  System.err.println("Missing start date");
+                  printErrorMessageAndExit(TOO_FEW_ARGUMENTS_OPTIONS_PRESENT);
+                  break;
+                case 4:
+                  System.err.println("Missing start time");
+                  printErrorMessageAndExit(TOO_FEW_ARGUMENTS_OPTIONS_PRESENT);
+                  break;
+                case 5:
+                  System.err.println("Missing end date");
+                  printErrorMessageAndExit(TOO_FEW_ARGUMENTS_OPTIONS_PRESENT);
+                  break;
+                case 6:
+                  System.err.println("Missing end time");
+                  printErrorMessageAndExit(TOO_FEW_ARGUMENTS_OPTIONS_PRESENT);
+                  break;
+              }
+            }
+            //printErrorMessageAndExit(TOO_FEW_ARGUMENTS_OPTIONS_PRESENT);
           }
           else if(!(args[0].equalsIgnoreCase("-readme") || args[1].equalsIgnoreCase("-readme")) &&
                 !(args[0].equalsIgnoreCase("-print") || args[1].equalsIgnoreCase("-print"))){
@@ -149,16 +178,16 @@ public class Project1 {
       System.err.println("Entered description is empty. Expected a description consisting of any characters including numbers");
     }
     if(!checkIfDateIsValid(args[3])) {
-      System.err.println("Entered start date is invalid");
+      System.err.println("Entered start date is invalid. \n Expected start date in the format mm/dd/yyyy.");
     }
     if(!checkIfTimeIsValid(args[4])) {
-      System.err.println("Entered start time is invalid");
+      System.err.println("Entered start time is invalid. \n Expected start time in the format hh:mm");
     }
     if(!checkIfDateIsValid(args[5])) {
-      System.err.println("Entered end date is invalid");
+      System.err.println("Entered end date is invalid. \n Expected end date in the format mm/dd/yyyy");
     }
     if(!checkIfTimeIsValid(args[6])) {
-      System.err.println("Entered end time is invalid");
+      System.err.println("Entered end time is invalid. \n Expected end time in the format hh:mm");
     }
     if (checkIfNameOrDescriptionIsValid(args[1]) && checkIfNameOrDescriptionIsValid(args[2]) && checkIfDateIsValid(args[3]) && checkIfDateIsValid(args[5]) && checkIfTimeIsValid(args[4])
             && checkIfTimeIsValid(args[6])) {

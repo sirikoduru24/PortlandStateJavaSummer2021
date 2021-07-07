@@ -37,10 +37,22 @@ class Project1IT extends InvokeMainTestCase {
   }
 
   @Test
+  void invokingMainWithOnlyReadMe() {
+    MainMethodResult result = invokeMain(Project1.class, "-readme");
+    assertThat(result.getTextWrittenToStandardError(), containsString(Project1.README_TEXT));
+    assertThat(result.getExitCode(), IsEqual.equalTo(1));
+  }
+
+  @Test
+  void invokingMainWithOnlyPrint() {
+    MainMethodResult result = invokeMain(Project1.class, "-print");
+    assertThat(result.getTextWrittenToStandardError(), containsString("Missing arguments to perform print"));
+    assertThat(result.getExitCode(), IsEqual.equalTo(1));
+  }
+  @Test
   void invokingMainOnlyWithOneArgument() {
     MainMethodResult result = invokeMain(Project1.class, "siri");
     assertThat(result.getTextWrittenToStandardError(), containsString(Project1.USAGE_MSG));
-
   }
   @Test
   void invokingMainWithReadmeAtOptionsPositionPrintsReadMEAndExits() {
@@ -76,10 +88,40 @@ class Project1IT extends InvokeMainTestCase {
   }
 
   @Test
-  void invokingMainWithLessNumberOfArgumentsThanExpectedWithCorrectOptions() {
-    MainMethodResult result = invokeMain(Project1.class, "-print", "Lisa", "lunch", "Have dinner");
+  void invokingMainWithTwoArguments() {
+    MainMethodResult result = invokeMain(Project1.class, "-print","siri");
+    assertThat(result.getTextWrittenToStandardError(), containsString("Missing description"));
     assertThat(result.getTextWrittenToStandardError(), containsString(Project1.TOO_FEW_ARGUMENTS_OPTIONS_PRESENT));
   }
+
+  @Test
+  void invokingMainWithThreeArguments() {
+    MainMethodResult result = invokeMain(Project1.class, "-print","siri","meet me");
+    assertThat(result.getTextWrittenToStandardError(), containsString("Missing start date"));
+    assertThat(result.getTextWrittenToStandardError(), containsString(Project1.TOO_FEW_ARGUMENTS_OPTIONS_PRESENT));
+  }
+
+  @Test
+  void invokingMainWithFourArguments() {
+    MainMethodResult result = invokeMain(Project1.class, "-print","siri", "meet me", "7/15/2021");
+    assertThat(result.getTextWrittenToStandardError(), containsString("Missing start time"));
+    assertThat(result.getTextWrittenToStandardError(), containsString(Project1.TOO_FEW_ARGUMENTS_OPTIONS_PRESENT));
+  }
+
+  @Test
+  void invokingMainWithFiveArguments() {
+    MainMethodResult result = invokeMain(Project1.class, "-print","siri","meet me", "7/15/2021", "1:39");
+    assertThat(result.getTextWrittenToStandardError(), containsString("Missing end date"));
+    assertThat(result.getTextWrittenToStandardError(), containsString(Project1.TOO_FEW_ARGUMENTS_OPTIONS_PRESENT));
+  }
+
+  @Test
+  void invokingMainWithSixArguments() {
+    MainMethodResult result = invokeMain(Project1.class, "-print","siri","meet me", "7/15/2021", "1:39", "7/15/2021");
+    assertThat(result.getTextWrittenToStandardError(), containsString("Missing end time"));
+    assertThat(result.getTextWrittenToStandardError(), containsString(Project1.TOO_FEW_ARGUMENTS_OPTIONS_PRESENT));
+  }
+
   @Test
   void invokingMainWithCorrectNumberOfArgumentsButNoOptions() {
     MainMethodResult result = invokeMain(Project1.class, "-prt", "siri", "Have dinner", "7/15/2021", "14:39", "7/15/2021", "14:39");
