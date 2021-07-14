@@ -19,11 +19,11 @@ public class Appointment extends AbstractAppointment {
    * When the constructor appointment is invoked the local variables are assigned with the values from appointment.
    * @param args
    */
-  public Appointment(String[] args) {
-    this.ownerName = args[1];
-    this.description = args[2];
-    this.beginTime = args[3] + " " + args[4];
-    this.endTime = args[5] + " " + args[6];
+  public Appointment(String[] args, int startPosition) {
+    this.ownerName = args[startPosition+1];
+    this.description = args[startPosition+2];
+    this.beginTime = args[startPosition+3] + "," + args[startPosition+4];
+    this.endTime = args[startPosition+5] + "," + args[startPosition+6];
     }
 
   @Override

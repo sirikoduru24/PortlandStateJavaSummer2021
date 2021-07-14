@@ -16,19 +16,19 @@ public class AppointmentTest {
 
   @Test
   void getBeginTimeReturnsBeginTimeAlongWithDate() {
-    Appointment appointment = new Appointment(new String[]{"-print","siri","have appointment with Lisa","7/15/2021" ,"12:30", "7/15/2021" ,"14:30"});
-    assertThat(appointment.getBeginTimeString(), equalTo("7/15/2021 12:30"));
+    Appointment appointment = new Appointment(new String[]{"-print","siri","have appointment with Lisa","7/15/2021" ,"12:30", "7/15/2021" ,"14:30"},0);
+    assertThat(appointment.getBeginTimeString(), equalTo("7/15/2021,12:30"));
   }
 
   @Test
   void getEndTimeReturnsDateAlongWithTime() {
-    Appointment appointment = new Appointment(new String[]{"-print","siri","have appointment with Lisa","7/15/2021" ,"12:30", "7/15/2021","14:30"});
-    assertThat(appointment.getEndTimeString(), equalTo("7/15/2021 14:30"));
+    Appointment appointment = new Appointment(new String[]{"-print","siri","have appointment with Lisa","7/15/2021" ,"12:30", "7/15/2021","14:30"},0);
+    assertThat(appointment.getEndTimeString(), equalTo("7/15/2021,14:30"));
   }
 
   @Test
   void getDescriptionReturnsDescription() {
-    Appointment appointment = new Appointment(new String[]{"-print","siri","have appointment with Lisa","7/15/2021" ,"12:30", "7/15/2021","14:30"});
+    Appointment appointment = new Appointment(new String[]{"-print","siri","have appointment with Lisa","7/15/2021" ,"12:30", "7/15/2021","14:30"},0);
     assertThat(appointment.getDescription(), equalTo("have appointment with Lisa"));
   }
 

@@ -21,6 +21,9 @@ public class AppointmentBook extends AbstractAppointmentBook {
         super();
     }
 
+    public AppointmentBook(String name) {
+        this.ownerName = name;
+    }
     /**
      * This method assigns the owner name to the variable ownerName and adds the appointment to ArrayList.
      * @param appointment
@@ -36,7 +39,7 @@ public class AppointmentBook extends AbstractAppointmentBook {
      */
     @Override
     public String getOwnerName() {
-        return ownerName;
+        return this.ownerName;
     }
 
     /**
@@ -45,8 +48,7 @@ public class AppointmentBook extends AbstractAppointmentBook {
      */
     @Override
     public Collection getAppointments() {
-       // System.out.println(appt);
-        return appt;
+        return this.appt;
     }
 
     /**
@@ -55,6 +57,6 @@ public class AppointmentBook extends AbstractAppointmentBook {
      */
     @Override
     public void addAppointment(AbstractAppointment abstractAppointment) {
-        appt.add((Appointment) abstractAppointment);
+        this.appt.add((Appointment) abstractAppointment);
     }
 }
