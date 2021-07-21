@@ -9,7 +9,7 @@ public class AppointmentBookTest {
 
     @Test
     public void getOwnerNameReturnsName() {
-        AppointmentBook apptBook = new AppointmentBook(new Appointment(new String[]{"-print","siri","have appointment with Lisa","7/15/2021" ,"12:30", "7/15/2021" ,"14:30"},0),"siri");
+        AppointmentBook apptBook = new AppointmentBook(new Appointment(new String[]{"-print","siri","have appointment with Lisa","7/15/2021" ,"2:30","am","7/15/2021" ,"4:30","am"},0),"siri");
         assertThat(apptBook.getOwnerName(), containsString("siri"));
     }
 }

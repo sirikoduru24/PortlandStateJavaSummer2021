@@ -23,7 +23,7 @@ public class TextParser implements AppointmentBookParser {
     public TextParser(String fileName, String ownerName) {
         if(fileName == null || fileName.trim().isEmpty()) {
             System.err.println("Entered an invalid file name");
-            System.err.println(Project2.USAGE_MSG);
+            System.err.println(Project3.USAGE_MSG);
             System.exit(1);
         }
         this.fileName = fileName;
@@ -64,10 +64,14 @@ public class TextParser implements AppointmentBookParser {
             for(String appointments:list) {
                 String[] currentAppointment = appointments.split(",");
                 if(currentAppointment[0].equalsIgnoreCase(apptbook.getOwnerName())) {
-                    if(currentAppointment.length == 6) {
+                    if(currentAppointment.length == 4) {
                         ValidateArguments vargs = new ValidateArguments();
-                        if (vargs.checkIfArgsAreValid(currentAppointment[0], currentAppointment[1], currentAppointment[2], currentAppointment[3], currentAppointment[4], currentAppointment[5])) {
-                            apptbook.addAppointment(new Appointment(currentAppointment, -1));
+                        String[] date1 = currentAppointment[2].split(" ");
+                        String[] date2 = currentAppointment[3].split(" ");
+                        if(date1.length!=3) {System.err.println("Invalid format of begin date in file. Expected in the format mm/dd/yyyy");System.exit(1);}
+                        if(date2.length!=3) {System.err.println("Invalid format of end date in file. Expected in the format mm/dd/yyyy");System.exit(1);}
+                        if (vargs.checkIfArgsAreValid(currentAppointment[0], currentAppointment[1], date1[0], date1[1], date1[2], date2[0], date2[1],date2[2])) {
+                            apptbook.addAppointment(new Appointment(currentAppointment));
                         } else {
                             System.err.println("The above arguments in text file in line: "+lineNumber+" are wrong");
                             System.err.println("\nReading from text file stopped and exiting as it has malformed contents.");
@@ -75,7 +79,7 @@ public class TextParser implements AppointmentBookParser {
                         }
                     } else {
                         System.err.println("Invalid arguments present in line number "+lineNumber+" in the file");
-                        System.err.println(Project2.USAGE_MSG);
+                        System.err.println(Project3.USAGE_MSG);
                         System.exit(1);
                     }
                 } else {
