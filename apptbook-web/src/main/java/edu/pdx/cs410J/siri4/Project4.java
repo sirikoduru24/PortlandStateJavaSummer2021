@@ -92,7 +92,6 @@ public class Project4 {
                                 }
                                 //get all appointments related to a particular owner in pretty format.
                                 if(args.length == 5) {
-                                       System.out.println("Appointments for particular owner - ");
                                        System.out.println(client.getAllAppointmentBookEntries(args[4]));
                                 }
 
