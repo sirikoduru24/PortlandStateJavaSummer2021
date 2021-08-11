@@ -1,76 +1,81 @@
-package edu.pdx.cs410J.siri4;
-
-import android.os.Bundle;
-
-import com.google.android.material.snackbar.Snackbar;
+package edu.pdx.cs410j.siri4;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.View;
-
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import edu.pdx.cs410J.siri4.databinding.ActivityMainBinding;
-
+import android.content.Context;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-
-    private AppBarConfiguration appBarConfiguration;
-    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        BottomNavigationView navView = findViewById(R.id.bottom_navigatin_view);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.home2, R.id.addAppointments, R.id.search)
+                .build();
 
-        setSupportActionBar(binding.toolbar);
-
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        NavigationUI.setupWithNavController(navView, navController);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            case R.id.action_settings:
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+                LayoutInflater layoutInflater = (LayoutInflater) MainActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View customView = layoutInflater.inflate(R.layout.readme_popup,null);
+                View layoutView = findViewById(R.id.main_layout);
+                Button closePopupBtn = (Button) customView.findViewById(R.id.closePopupBtn);
+
+                PopupWindow popupWindow = new PopupWindow(customView,RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+                TextView popupText = customView.findViewById(R.id.popup_tv);
+                String helpContents = "Hi, Welcome to Help Menu of Appointment Book Application.\n" +
+                        "This Application has Three tabs namely Home, Add Appointments and Search.\n" +
+                        "Home tab describes what each tab has.\n" +
+                        "If you click on the Add Appointment tab, it facilitates with a form\n" +
+                        "Here in this Add appointments section inorder to add an Appointment:\n" +
+                        "Enter ownername(Any name), description(Should not be empty), start and end times in the formats specified(mm/dd/yyyy hh:mm am/pm).\n" +
+                        "In the next tab i.e Search, if you want to get all the Appointments of a owner just enter owner name.\n" +
+                        "If you want to get the Appointments between specific times enter the times specified in the format(mm/dd/yyyy hh:mm am/pm).";
+                popupText.setText(helpContents);
+
+                popupWindow.showAtLocation(layoutView, Gravity.CENTER, 0, 0);
+
+                closePopupBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                    }
+                });
+
+                return true;
         }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
+        return true;
     }
 }

@@ -1,12 +1,21 @@
 <resources>
     <string name="app_name">Appointment Book</string>
-    <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="this_form_facilitates_to_create_or_add_appointments">This Form facilitates to create or Add Appointments</string>
+    <string name="owner_name">Owner Name</string>
+    <string name="ow_name">Owner Name</string>
+    <string name="description">Description</string>
+    <string name="begin_date_time">Begin Date,Time</string>
+    <string name="end_date_time">End Date,Time</string>
+    <string name="date_format">mm/dd/yyyy hh:mm am/pm</string>
+    <string name="print">Print the latest Appointment</string>
+    <string name="add">Add Appointment</string>
+    <string name="search_owner">This form facilitates to search for Appointments</string>
+    <string name="view_appointment_book">View Appointment Book</string>
+    <string name="owner_name_req">Owner name (*)</string>
+    <string name="search_page_text">Owner name in this form is mandatory to search.\n If only owner name is entered all appointments are returned. \nIf both start and end dates are entered all the appointments between them are returned.</string>
+    <string name="search_results">Search Results</string>
+    <string name="home_contents">home_contents</string>
+    <string name="close">Close</string>
 </resources>

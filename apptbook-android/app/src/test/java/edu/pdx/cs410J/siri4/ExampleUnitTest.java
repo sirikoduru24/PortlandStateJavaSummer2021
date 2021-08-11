@@ -1,4 +1,4 @@
-package edu.pdx.cs410J.siri4;
+package edu.pdx.cs410j.siri4;
 
 import org.junit.Test;
 
